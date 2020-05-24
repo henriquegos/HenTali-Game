@@ -7,11 +7,11 @@ largura_janela = 1080
 altura_janela = 540
 largura_background = 1080
 altura_background = 540
-largura_mario = 64
-altura_mario = 64
+largura_mario = 80
+altura_mario = 80
 gravidade = 2
-tamanho_pulo = 10
-altura_chão = altura_janela - 60
+tamanho_pulo = 20
+altura_chão = altura_janela - 45
 TITULO = 'Mariozinho'
 
 # Possíveis estados do jogador
@@ -37,7 +37,7 @@ class Personagem(pygame.sprite.Sprite):
         self.image = img
         self.rect = self.image.get_rect()
         self.rect.centerx = 64 
-        self.rect.bottom = altura_janela - 32
+        self.rect.bottom = altura_chão
         self.speedx = 0
         self.speedy = 0
         self.state = STILL
@@ -87,17 +87,17 @@ while state != DONE:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
-                player.speedx -= 1
+                player.speedx -= 2
             if event.key == pygame.K_RIGHT:
-                player.speedx += 1
+                player.speedx += 2
             if event.key == pygame.K_UP:
                 player.pulo()
         
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_LEFT:
-                player.speedx += 1
+                player.speedx += 2
             if event.key == pygame.K_RIGHT:
-                player.speedx -= 1
+                player.speedx -= 2
         
     
     all_sprites.update()
