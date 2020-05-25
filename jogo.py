@@ -1,6 +1,8 @@
+#importa bibliotecas necessarias
 import pygame
 import random
 
+#inicia framework
 pygame.init()
 
 # Variáveis
@@ -62,6 +64,9 @@ class Personagem(pygame.sprite.Sprite):
         self.speedx = 0
         self.speedy = 0
         self.state = STILL
+
+        self.last_shot = pygame.time.get_ticks()
+        self.shoot_ticks = 500
     
     def update(self):
         self.rect.x += self.speedx
@@ -85,9 +90,15 @@ class Personagem(pygame.sprite.Sprite):
             self.state = JUMPING
     
     def shoot(self):
-        new_bullet = Bullet(self.assets, self.rect.centery, self.rect.left)
-        self.groups['all_sprites'].add(new_bullet)
-        self.groups['all_bullets'].add(new_bullet)
+
+        now = pygame.time.get_ticks()
+        elapsed_ticks = now - self.last_shot
+
+        if elapsed_ticks > self.shoot_ticks:
+            self.last_shot = now
+            new_bullet = Bullet(self.assets, self.rect.centery, self.rect.left)
+            self.groups['all_sprites'].add(new_bullet)
+            self.groups['all_bullets'].add(new_bullet)
     
 #Classe Boss que representa o chefão
 class Boss(pygame.sprite.Sprite):
@@ -97,23 +108,33 @@ class Boss(pygame.sprite.Sprite):
         self.image = assets['boss_img']
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(0, largura_janela - largura_boss)
-        self.rect.bottom = random.randint(0, altura_chão)
+        self.rect.bottom = random.randint(altura_boss, altura_chão)
         self.groups = groups
         self.assets = assets
+
+        self.last_poder = pygame.time.get_ticks()
+        self.pooder_ticks = 5000
     
     def poder(self):
-        new_poder = Poderzin(self.assets)
-        self.groups['all_sprites'].add(new_poder)
-        self.groups['all_poderzin'].add(new_poder)
+        now = pygame.time.get_ticks()
+        decorridos_ticks = now - self.last_poder
 
+        #Verifica se pode atirar novamente
+        if decorridos_ticks > self.pooder_ticks:
+            self.last_poder = now
+            new_poder = Poderzin(self.assets, self.rect.centery, self.rect.right)
+            self.groups['all_sprites'].add(new_poder)
+            self.groups['all_poderzin'].add(new_poder)
+
+#Classe que representa o poder do Boss
 class Poderzin(pygame.sprite.Sprite):
-    def __init__(self, assets):
+    def __init__(self, assets, centery, left):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets['poder_img']
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, largura_janela - largura_poderzin)
-        self.rect.y = random.randint(-100, -altura_poderzin)
+        self.rect.x = left
+        self.rect.y = centery
         self.speedx = random.randint(-3, 3)
         self.speedy = random.randint(2, 9)
 
@@ -167,7 +188,7 @@ player = Personagem(groups, assets)
 all_sprites.add(player)
 #Criando  os meteoros
 for i in range(8):
-    poder = Poderzin(assets)
+    poder = Poderzin(assets, chefão.rect.centery, chefão.rect.left)
     all_sprites.add(poder)
     all_poderzin.add(poder)
 
@@ -198,14 +219,17 @@ while state != DONE:
             if event.key == pygame.K_RIGHT:
                 player.speedx -= SPEEDX
         
-    
+    #atualiza estado do jogo
     all_sprites.update()
 
+    #gera sáidas
     window.fill((46, 139, 87))
     window.blit(assets['background'],(0,0))
     
+    #desenhando sprites
     all_sprites.draw(window)
 
+    #mostra o novo frame para o jogador
     pygame.display.update()
 
 pygame.quit()
