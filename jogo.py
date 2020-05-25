@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 
@@ -11,9 +12,14 @@ largura_mario = 80
 altura_mario = 80
 largura_tiro = 160
 altura_tiro = 80
+largura_boss = 160
+altura_boss = 160
+largura_poderzin = 40
+altura_poderzin = 40
 gravidade = 2
 tamanho_pulo = 20
 altura_chão = altura_janela - 45
+velo_tiro = 5
 SPEEDX = 3
 FPS = 60
 TITULO = 'Mariozinho'
@@ -36,6 +42,10 @@ def load_assets():
     assets['mario_img'] = pygame.transform.scale(assets['mario_img'],(largura_mario,altura_mario))
     assets['bullet_img'] = pygame.image.load('assets/img/mario_especial.png').convert_alpha()
     assets['bullet_img'] = pygame.transform.scale(assets['bullet_img'],(largura_tiro,altura_tiro))
+    assets['boss_img'] = pygame.image.load('assets/img/boss_mario.png').convert_alpha()
+    assets['boss_img'] = pygame.transform.scale(assets['boss_img'],(largura_boss, altura_boss))
+    assets['poder_img'] = pygame.image.load('assets/img/poder_boss.png').convert_alpha()
+    assets['poder_img'] = pygame.transform.scale(assets['poder_img'], (largura_poderzin, altura_poderzin))
     return assets
 
 #Classe Personagem que representa o herói
@@ -78,7 +88,45 @@ class Personagem(pygame.sprite.Sprite):
         new_bullet = Bullet(self.assets, self.rect.centery, self.rect.left)
         self.groups['all_sprites'].add(new_bullet)
         self.groups['all_bullets'].add(new_bullet)
+    
+#Classe Boss que representa o chefão
+class Boss(pygame.sprite.Sprite):
+    def __init__(self, groups, assets):
+        pygame.sprite.Sprite.__init__(self)
 
+        self.image = assets['boss_img']
+        self.rect = self.image.get_rect()
+        self.rect.centerx = random.randint(0, largura_janela - largura_boss)
+        self.rect.bottom = random.randint(0, altura_chão)
+        self.groups = groups
+        self.assets = assets
+    
+    def poder(self):
+        new_poder = Poderzin(self.assets)
+        self.groups['all_sprites'].add(new_poder)
+        self.groups['all_poderzin'].add(new_poder)
+
+class Poderzin(pygame.sprite.Sprite):
+    def __init__(self, assets):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = assets['poder_img']
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0, largura_janela - largura_poderzin)
+        self.rect.y = random.randint(-100, -altura_poderzin)
+        self.speedx = random.randint(-3, 3)
+        self.speedy = random.randint(2, 9)
+
+    def update(self):
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+        if self.rect.top > altura_janela or self.rect.right < 0 or self.rect.left > largura_janela:
+            self.rect.x = random.randint(0, largura_janela - largura_poderzin)
+            self.rect.y = random.randint(-100, -largura_poderzin)
+            self.speedx = random.randint(-3, 3)
+            self.speedy = random.randint(2, 5)
+
+# Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, assets, centery, left):
         pygame.sprite.Sprite.__init__(self)
@@ -88,7 +136,7 @@ class Bullet(pygame.sprite.Sprite):
         
         self.rect.left = left
         self.rect.centery = centery-25
-        self.speedx = 2
+        self.speedx = velo_tiro
     
     def update(self):
         self.rect.x += self.speedx
@@ -102,15 +150,28 @@ DONE = 1
 clock = pygame.time.Clock()
 assets = load_assets()
 
+#Grupos
 all_sprites = pygame.sprite.Group()
+all_poderzin = pygame.sprite.Group()
 all_bullets = pygame.sprite.Group()
 groups = {}
 groups['all_sprites'] = all_sprites
+groups['all_poderzin'] = all_poderzin
 groups['all_bullets'] = all_bullets
 
+#Criando o Chefão
+chefão = Boss(groups, assets)
+all_sprites.add(chefão)
+#Criando o jogador
 player = Personagem(groups, assets)
 all_sprites.add(player)
+#Criando  os meteoros
+for i in range(8):
+    poder = Poderzin(assets)
+    all_sprites.add(poder)
+    all_poderzin.add(poder)
 
+# ======== Loop principal =========
 state = PLAYING
 while state != DONE:
 
