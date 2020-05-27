@@ -14,10 +14,10 @@ Uma primeira interface semelhante ao disponivel no link:
 " Tipo aquele pré jogo mesmo sabe"
 
 ___Na segunda:
-Aquela janela que está sendo desenvolvida agora no código na qual precisa se alocar novos elementos de modo que o herói possa ir subindo na janela("altura mesmo")
-ai nessa mesma janela em seu topo um cano no qual ele entra e ai ele vai para a terceira janela
+Aquela janela que está sendo desenvolvida agora no código na qual precisa se alocar novos elementos de modo que o herói possa ir subindo na janela("plataformas")
+ai nessa mesma janela em seu topo direito um "portal" ou algo do genero no qual ele entra e ai ele vai para a terceira janela se derrotou o Boss
 
 ___Na terceira:
-Um chefão topque seja facil de se fazer e rapido de se matar
+Algo semelhante ao que foi feito na segunda janela mas com um Boss diferente e diferentes plataformas
 
-coisas a mais podem ser melhor pensadas conforme vamos trabalhando, como animações pro herói por exemplo.
+coisas a mais podem ser melhor pensadas conforme vamos trabalhando, como animações pros personagens e design do que é mostrado pro jogador.
