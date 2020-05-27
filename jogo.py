@@ -10,8 +10,8 @@ largura_janela = 1080
 altura_janela = 540
 largura_background = 1080
 altura_background = 540
-largura_mario = 80
-altura_mario = 80
+largura_heroi = 80
+altura_heroi = 80
 largura_tiro = 160
 altura_tiro = 80
 largura_boss = 160
@@ -19,7 +19,7 @@ altura_boss = 160
 largura_poderzin = 40
 altura_poderzin = 40
 gravidade = 2
-tamanho_pulo = 20
+tamanho_pulo = 30
 altura_chão = altura_janela - 45
 velo_tiro = 5
 SPEEDX = 3
@@ -41,7 +41,7 @@ def load_assets():
     assets['background'] = pygame.image.load('assets/img/mario_backgroud.png').convert_alpha()
     assets['background'] = pygame.transform.scale(assets['background'],(largura_background,altura_background))
     assets['mario_img'] = pygame.image.load('assets/img/nego_mario.png').convert_alpha()
-    assets['mario_img'] = pygame.transform.scale(assets['mario_img'],(largura_mario,altura_mario))
+    assets['mario_img'] = pygame.transform.scale(assets['mario_img'],(largura_heroi,altura_heroi))
     assets['bullet_img'] = pygame.image.load('assets/img/mario_especial.png').convert_alpha()
     assets['bullet_img'] = pygame.transform.scale(assets['bullet_img'],(largura_tiro,altura_tiro))
     assets['boss_img'] = pygame.image.load('assets/img/boss_mario.png').convert_alpha()
@@ -164,7 +164,7 @@ class Poderzin(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.speedx
         self.rect.y += self.speedy
-        if self.rect.top > altura_janela or self.rect.right < 0 or self.rect.left > largura_janela:
+        if (self.rect.top > altura_janela) or (self.rect.right < 0) or (self.rect.left > largura_janela):
             self.rect.x = chefão.rect.left
             self.rect.y = chefão.rect.centery
             self.speedx = random.randint(-5, 5)
