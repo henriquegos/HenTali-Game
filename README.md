@@ -5,8 +5,10 @@ O que falta fazer no jogo:
 -Definir nome do jogo
 -Definir objetivo do personagem para saber o que mais há de ser feito
 -Alocar novos elementos(Blocos para pegar cogumelo e "mini vilões" por exemplo)
+- Definir tela de inicio e fim
+- Definir quantidade de vidas - mostrar vidas acabando
 
-Minha ideia para esse jogo atualmente são três janelas:
+A ideia pra esse jogo atualmente são três janelas:
 
 ___Na primeira:
 Uma primeira interface semelhante ao disponivel no link:
