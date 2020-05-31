@@ -2,10 +2,9 @@
 PyGame referente a disciplina de Design de Software no Insper em 2020
 
 O que falta fazer no jogo:
-- Definir nome do jogo
 - Definir objetivo do personagem para saber o que mais há de ser feito
 - Alocar novos elementos(Blocos para pegar cogumelo e "mini vilões" por exemplo)
-- Definir tela de inicio e fim
+- Definir tela de fim
 - Definir quantidade de vidas - mostrar vidas acabando
 
 A ideia pra esse jogo atualmente são três janelas:
