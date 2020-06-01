@@ -21,4 +21,4 @@ def load_assets():
     assets[BOSS_IMG] = pygame.transform.scale(assets['boss_img'],(largura_boss, altura_boss))
     assets[PODER_IMG] = pygame.image.load('assets/img/poder_boss.png').convert_alpha()
     assets[PODER_IMG] = pygame.transform.scale(assets['poder_img'], (largura_poderzin, altura_poderzin))
-    return assets 
+    return assets  
