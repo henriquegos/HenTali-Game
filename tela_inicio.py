@@ -20,10 +20,14 @@ def init_screen(screen):
             if event.type == pygame.QUIT:
                 state = QUIT
                 running = False
-
             if event.type == pygame.KEYUP:
-                state = GAME
-                running = False
+                if event.key == pygame.K_q:
+                    state = QUIT
+                    running = False
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_SPACE: #Caso o jogador queira iniciar o jogo, precisa apertar "espaço"
+                    state = GAME
+                    running = False
 
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
