@@ -10,7 +10,7 @@ class Personagem(pygame.sprite.Sprite):
 
         self.image = assets[MARIO_IMG]
         self.rect = self.image.get_rect()
-        self.rect.centerx = 64 
+        self.rect.centerx = 80 
         self.rect.bottom = altura_chão
         self.groups = groups
         self.assets = assets
@@ -141,3 +141,5 @@ class Bullet(pygame.sprite.Sprite):
 
         if self.rect.left > largura_janela or self.rect.right < 0:
             self.kill()
+
+

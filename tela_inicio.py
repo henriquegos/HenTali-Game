@@ -16,8 +16,8 @@ def init_screen(screen):
         # Ajusta a velocidade do jogo.
         clock.tick(FPS)
 
-        def fade(largura_background, altura_background): 
-            fade = pygame.Surface((largura_background, altura_background))
+        def fade(width, height): 
+            fade = pygame.Surface((width, height))
             fade.fill((0,0,0))
             for alpha in range(0, 300):
                 fade.set_alpha(alpha)
@@ -39,7 +39,8 @@ def init_screen(screen):
                 if event.key == pygame.K_SPACE: #Caso o jogador queira iniciar o jogo, precisa apertar "espaço"
                     fade(largura_background, altura_background)
                     state = GAME
-                    running = False
+                    running = False 
+                    
 
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
@@ -48,4 +49,4 @@ def init_screen(screen):
         # Depois de desenhar tudo, inverte o display.
         pygame.display.flip()
 
-    return state
+    return state 

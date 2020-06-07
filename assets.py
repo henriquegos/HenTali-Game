@@ -1,4 +1,4 @@
-import pygame
+import pygame   
 from configuracao import largura_background, altura_background, largura_heroi, altura_heroi, largura_tiro, altura_tiro, largura_boss, altura_boss, largura_poderzin, altura_poderzin
 
 BACKGROUND = 'background'
@@ -6,6 +6,7 @@ MARIO_IMG = 'mario_img'
 BULLET_IMG = 'bullet_img'
 BOSS_IMG = 'boss_img'
 PODER_IMG = 'poder_img'
+
 
 
 #assets
@@ -21,4 +22,5 @@ def load_assets():
     assets[BOSS_IMG] = pygame.transform.scale(assets['boss_img'],(largura_boss, altura_boss))
     assets[PODER_IMG] = pygame.image.load('assets/img/poder_boss.png').convert_alpha()
     assets[PODER_IMG] = pygame.transform.scale(assets['poder_img'], (largura_poderzin, altura_poderzin))
-    return assets  
+
+    return assets   

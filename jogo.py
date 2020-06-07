@@ -38,6 +38,10 @@ def screen_game(window):
     DONE = 1
     state = PLAYING
 
+    keys_down = {}
+    score = 0
+    lives = 3
+
     # ======== Loop principal =========
 
     while state != DONE:
@@ -63,7 +67,14 @@ def screen_game(window):
                     player.speedx += SPEEDX
                 if event.key == pygame.K_RIGHT:
                     player.speedx -= SPEEDX
-            
+
+            hits = pygame.sprite.spritecollide(player, all_poderzin, True)
+            if len(hits)>0:
+                lives -=1
+                if lives == 0:
+                    state = DONE
+
+
         #atualiza estado do jogo
         all_sprites.update()
 
