@@ -11,6 +11,7 @@ pygame.init()
 window = pygame.display.set_mode((largura_janela,altura_janela))
 pygame.display.set_caption(TITULO)
 
+
 state = INIT 
 while state != QUIT:
     if state == INIT:

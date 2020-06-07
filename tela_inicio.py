@@ -1,5 +1,7 @@
 import pygame 
-from configuracao import FPS, BLACK, GAME, QUIT
+from configuracao import largura_background, altura_background, FPS, BLACK, GAME, QUIT
+
+
 def init_screen(screen):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
@@ -14,18 +16,28 @@ def init_screen(screen):
         # Ajusta a velocidade do jogo.
         clock.tick(FPS)
 
+        def fade(largura_background, altura_background): 
+            fade = pygame.Surface((largura_background, altura_background))
+            fade.fill((0,0,0))
+            for alpha in range(0, 300):
+                fade.set_alpha(alpha)
+                screen.blit(fade, (0,0))
+                pygame.display.update()
+                pygame.time.delay(2) 
+
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
             # Verifica se foi fechado.
             if event.type == pygame.QUIT:
                 state = QUIT
                 running = False
-            if event.type == pygame.KEYUP:
+            if event.type == pygame.KEYUP: #Outra opção pra sair do jogo, apertar a tecla Q
                 if event.key == pygame.K_q:
                     state = QUIT
                     running = False
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE: #Caso o jogador queira iniciar o jogo, precisa apertar "espaço"
+                    fade(largura_background, altura_background)
                     state = GAME
                     running = False
 
