@@ -68,11 +68,12 @@ def screen_game(window):
                 if event.key == pygame.K_RIGHT:
                     player.speedx -= SPEEDX
 
-            hits = pygame.sprite.spritecollide(player, all_poderzin, True)
-            if len(hits)>0:
-                lives -=1
-                if lives == 0:
-                    state = DONE
+        #hits = pygame.sprite.spritecollide(player, all_poderzin, True)
+        hits = pygame.sprite.spritecollide(player, all_poderzin, True, pygame.sprite.collide_mask)
+        if len(hits)>0:
+            lives -=1
+            if lives == 0:
+                state = DONE 
 
 
         #atualiza estado do jogo

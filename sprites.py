@@ -9,6 +9,7 @@ class Personagem(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets[MARIO_IMG]
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = 80 
         self.rect.bottom = altura_chão
@@ -108,6 +109,7 @@ class Poderzin(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = assets[PODER_IMG]
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = chefão.rect.left
         self.rect.y = chefão.rect.centery
