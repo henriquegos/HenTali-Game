@@ -72,13 +72,19 @@ def screen_game(window):
                 if event.key == pygame.K_RIGHT:
                     player.speedx -= SPEEDX
 
-        #hits = pygame.sprite.spritecollide(player, all_poderzin, True)
         hits = pygame.sprite.spritecollide(player, all_poderzin, True, pygame.sprite.collide_mask)
         if len(hits) > 0:
             lives_hero -= 1
             if lives_hero == 0:
                 state = QUIT
                 pygame.quit() 
+
+        hits = pygame.sprite.spritecollide(chefão, all_bullets, True, pygame.sprite.collide_mask)
+        if len(hits) > 0:
+            lives_boss -= 1
+            if lives_boss == 0:
+                state = QUIT
+                pygame.quit()
 
         #atualiza estado do jogo
         all_sprites.update()
