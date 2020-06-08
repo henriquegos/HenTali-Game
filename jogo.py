@@ -51,6 +51,7 @@ def screen_game(window):
 
             if event.type == pygame.QUIT:
                 state = QUIT
+                pygame.quit() 
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -90,6 +91,12 @@ def screen_game(window):
         text_surface = assets["score_font"].render(chr(9829) * lives_hero, True, (255, 0, 0))
         text_rect = text_surface.get_rect()
         text_rect.bottomleft = (10, altura_background - 10)
+        window.blit(text_surface, text_rect)
+
+        # Desenhando as vidas do chefão
+        text_surface = assets["score_font"].render(chr(9829) * lives_boss, True, (104, 34, 139))
+        text_rect = text_surface.get_rect()
+        text_rect.topright = (largura_background - 10, 10)
         window.blit(text_surface, text_rect)
         
         #desenhando sprites
