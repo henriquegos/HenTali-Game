@@ -6,6 +6,7 @@ MARIO_IMG = 'mario_img'
 BULLET_IMG = 'bullet_img'
 BOSS_IMG = 'boss_img'
 PODER_IMG = 'poder_img'
+FONTE_LIVES = "score_font"
 
 
 
@@ -22,5 +23,6 @@ def load_assets():
     assets[BOSS_IMG] = pygame.transform.scale(assets['boss_img'],(largura_boss, altura_boss))
     assets[PODER_IMG] = pygame.image.load('assets/img/poder_boss.png').convert_alpha()
     assets[PODER_IMG] = pygame.transform.scale(assets['poder_img'], (largura_poderzin, altura_poderzin))
+    assets["score_font"] = pygame.font.Font('assets/font/PressStart2P.ttf', 28)
 
     return assets   

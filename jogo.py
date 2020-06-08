@@ -35,22 +35,22 @@ def screen_game(window):
     FALLING = 2
 
     PLAYING = 0
-    DONE = 1
+    QUIT = 1
     state = PLAYING
 
     keys_down = {}
-    score = 0
-    lives = 3
+    lives_hero = 3
+    lives_boss = 12
 
     # ======== Loop principal =========
 
-    while state != DONE:
+    while state != QUIT:
         clock.tick(FPS) 
 
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
-                state = DONE
+                state = QUIT
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -61,7 +61,10 @@ def screen_game(window):
                     player.pulo()
                 if event.key == pygame.K_SPACE:
                     player.shoot()
-            
+                if event.key == pygame.K_q:
+                    state = QUIT
+                    pygame.quit()
+           
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     player.speedx += SPEEDX
@@ -70,11 +73,11 @@ def screen_game(window):
 
         #hits = pygame.sprite.spritecollide(player, all_poderzin, True)
         hits = pygame.sprite.spritecollide(player, all_poderzin, True, pygame.sprite.collide_mask)
-        if len(hits)>0:
-            lives -=1
-            if lives == 0:
-                state = DONE 
-
+        if len(hits) > 0:
+            lives_hero -= 1
+            if lives_hero == 0:
+                state = QUIT
+                pygame.quit() 
 
         #atualiza estado do jogo
         all_sprites.update()
@@ -82,10 +85,17 @@ def screen_game(window):
         #gera sáidas
         window.fill((46, 139, 87))
         window.blit(assets['background'],(0,0))
+
+        # Desenhando as vidas do player
+        text_surface = assets["score_font"].render(chr(9829) * lives_hero, True, (255, 0, 0))
+        text_rect = text_surface.get_rect()
+        text_rect.bottomleft = (10, altura_background - 10)
+        window.blit(text_surface, text_rect)
         
         #desenhando sprites
         all_sprites.draw(window)
 
         #mostra o novo frame para o jogador
         pygame.display.update()
-
+    
+    return state

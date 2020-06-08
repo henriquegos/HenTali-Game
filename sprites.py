@@ -87,9 +87,6 @@ class Boss(pygame.sprite.Sprite):
             #atualizando posição do boss
             self.rect.centerx = random.randint(largura_janela/2, largura_janela - largura_boss)
             self.rect.bottom = random.randint(altura_boss, altura_chão)
-            #self.groups = groups
-            #self.assets = assets 
-
 
     # Responsável pelo poderzinho do Chefão
     def poder(self):
@@ -99,7 +96,7 @@ class Boss(pygame.sprite.Sprite):
         #Verifica se pode atirar novamente
         if decorridos_ticks > self.pooder_ticks:
             self.last_poder = agora
-            new_poder = Poderzin(self.assets, self.rect.centery, self.rect.right)
+            new_poder = Poderzin(self.assets, Boss.rect)
             self.groups['all_sprites'].add(new_poder)
             self.groups['all_poderzin'].add(new_poder)
 
