@@ -14,6 +14,7 @@ SOUND_GAMING = 'sound_gaming'
 SOUND_GOAL = 'sound_goal'
 SOUND_LOSES = 'sound_loses'
 SOUND_JUMP = "sound_jump"
+SOUND_HIT_HERO = 'sound_hit_hero'
 
 #assets
 def load_assets():
@@ -39,5 +40,6 @@ def load_assets():
     assets[SOUND_GOAL] = pygame.mixer.Sound('assets/snd/goal.ogg')
     assets[SOUND_LOSES] = pygame.mixer.Sound('assets/snd/death.ogg')
     assets[SOUND_JUMP] = pygame.mixer.Sound('assets/snd/jump.ogg')
+    assets[SOUND_HIT_HERO] = pygame.mixer.Sound('assets/snd/spring.ogg')
 
     return assets   
