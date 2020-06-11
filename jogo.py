@@ -2,7 +2,7 @@
 import pygame
 import random
 from configuracao import largura_background, altura_background, largura_heroi, altura_heroi, largura_tiro, altura_tiro, largura_boss, altura_boss, largura_poderzin, altura_poderzin, FPS, SPEEDX
-from assets import load_assets, SOUND_GOAL
+from assets import load_assets, SOUND_GOAL, SOUND_LOSES
 from sprites import Personagem, Boss, Poderzin, Bullet
 import time
 
@@ -77,6 +77,10 @@ def screen_game(window):
         if len(hits) > 0:
             lives_hero -= 1
             if lives_hero == 0:
+                som_loses = assets[SOUND_LOSES]
+                som_loses.set_volume(0.7)
+                som_loses.play()
+                time.sleep(3)
                 state = QUIT
                 pygame.quit() 
 
@@ -84,8 +88,10 @@ def screen_game(window):
         if len(hits) > 0:
             lives_boss -= 1
             if lives_boss == 0:
-                assets[SOUND_GOAL].play()
-                time.sleep(7)
+                som_goal = assets[SOUND_GOAL]
+                som_goal.set_volume(0.7)
+                som_goal.play()
+                time.sleep(8)
                 state = QUIT
                 pygame.quit()
 
