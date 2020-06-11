@@ -2,7 +2,7 @@
 import pygame
 import random
 from configuracao import largura_background, altura_background, largura_heroi, altura_heroi, largura_tiro, altura_tiro, largura_boss, altura_boss, largura_poderzin, altura_poderzin, FPS, SPEEDX
-from assets import load_assets, SOUND_GOAL, SOUND_LOSES
+from assets import load_assets, SOUND_GOAL, SOUND_LOSES, SOUND_JUMP
 from sprites import Personagem, Boss, Poderzin, Bullet
 import time
 
@@ -61,6 +61,9 @@ def screen_game(window):
                     player.speedx += SPEEDX
                 if event.key == pygame.K_UP:
                     player.pulo()
+                    som_pulo = assets[SOUND_JUMP]
+                    som_pulo.set_volume(0.2)
+                    som_pulo.play()
                 if event.key == pygame.K_SPACE:
                     player.shoot()
                 if event.key == pygame.K_q:
