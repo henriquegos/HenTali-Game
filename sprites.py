@@ -1,7 +1,7 @@
 import pygame
 import random
 from configuracao import largura_janela, altura_janela, largura_background, altura_background, largura_heroi, altura_heroi, largura_tiro, altura_tiro, largura_boss, altura_boss, largura_poderzin, altura_poderzin, gravidade, tamanho_pulo, altura_chão, velo_tiro, SPEEDX, FPS, STILL, JUMPING, FALLING
-from assets import BACKGROUND, MARIO_IMG, BULLET_IMG, BOSS_IMG, PODER_IMG
+from assets import BACKGROUND, MARIO_IMG, BULLET_IMG, BOSS_IMG, PODER_IMG, SOUND_GAMING      
 
 #Classe Personagem que representa o herói
 class Personagem(pygame.sprite.Sprite):
@@ -15,6 +15,9 @@ class Personagem(pygame.sprite.Sprite):
         self.rect.bottom = altura_chão
         self.groups = groups
         self.assets = assets
+        som_game = self.assets[SOUND_GAMING]
+        som_game.play()
+        som_game.set_volume(0.05)
         self.speedx = 0
         self.speedy = 0
         self.state = STILL

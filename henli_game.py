@@ -4,8 +4,9 @@ from configuracao import largura_janela, altura_janela, GAME, QUIT, INIT, TITULO
 from tela_inicio import init_screen 
 from jogo import screen_game
 
-#pygame.init()inicia framework
+#inicia frameworks
 pygame.init()
+pygame.mixer.init()
 
 #Janela
 window = pygame.display.set_mode((largura_janela,altura_janela))
