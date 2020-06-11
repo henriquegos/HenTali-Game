@@ -2,7 +2,7 @@
 import pygame
 import random
 from configuracao import largura_background, altura_background, largura_heroi, altura_heroi, largura_tiro, altura_tiro, largura_boss, altura_boss, largura_poderzin, altura_poderzin, FPS, SPEEDX
-from assets import load_assets, SOUND_GOAL, SOUND_LOSES, SOUND_JUMP, SOUND_HIT_HERO
+from assets import load_assets, SOUND_GOAL, SOUND_LOSES, SOUND_JUMP, SOUND_HIT_HERO, SOUND_HIT_BOSS
 from sprites import Personagem, Boss, Poderzin, Bullet
 import time
 
@@ -92,12 +92,15 @@ def screen_game(window):
 
         hits = pygame.sprite.spritecollide(chefão, all_bullets, True, pygame.sprite.collide_mask)
         if len(hits) > 0:
+            som_hit_boss = assets[SOUND_HIT_BOSS]
+            som_hit_boss.set_volume(0.05)
+            som_hit_boss.play()
             lives_boss -= 1
             if lives_boss == 0:
                 som_goal = assets[SOUND_GOAL]
                 som_goal.set_volume(0.6)
                 som_goal.play()
-                time.sleep(8)
+                time.sleep(7.8)
                 state = QUIT
                 pygame.quit()
 
