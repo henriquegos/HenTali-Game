@@ -43,5 +43,5 @@ def load_assets():
     assets[SOUND_JUMP] = pygame.mixer.Sound('assets/snd/jump.ogg')
     assets[SOUND_HIT_HERO] = pygame.mixer.Sound('assets/snd/spring.ogg')
     assets[SOUND_HIT_BOSS] = pygame.mixer.Sound('assets/snd/fireball.ogg')
-
+    
     return assets   

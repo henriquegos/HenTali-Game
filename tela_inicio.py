@@ -1,6 +1,13 @@
 import pygame 
 from configuracao import largura_background, altura_background, FPS, BLACK, GAME, QUIT
 
+pygame.mixer.init()
+    
+som_inicial = pygame.mixer.Sound('assets/snd/maintheme.ogg')
+som_inicial.set_volume(0.02)
+som_inicial.play()
+
+
 def fade(width, height, screen): 
     fade = pygame.Surface((width, height))
     fade.fill((0,0,0))
@@ -24,8 +31,7 @@ def init_screen(screen):
 
         # Ajusta a velocidade do jogo.
         clock.tick(FPS)
- 
-
+        
         # Processa os eventos (mouse, teclado, botão, etc).
         for event in pygame.event.get():
             # Verifica se foi fechado.
@@ -39,6 +45,7 @@ def init_screen(screen):
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE: #Caso o jogador queira iniciar o jogo, precisa apertar "espaço"
                     fade(largura_background, altura_background, screen)
+                    som_inicial.set_volume(0)
                     fade_estado = True
                     state = GAME
                     running = False 
