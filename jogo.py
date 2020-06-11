@@ -2,8 +2,9 @@
 import pygame
 import random
 from configuracao import largura_background, altura_background, largura_heroi, altura_heroi, largura_tiro, altura_tiro, largura_boss, altura_boss, largura_poderzin, altura_poderzin, FPS, SPEEDX
-from assets import load_assets
+from assets import load_assets, SOUND_GOAL
 from sprites import Personagem, Boss, Poderzin, Bullet
+import time
 
 def screen_game(window):
     clock = pygame.time.Clock()
@@ -83,6 +84,8 @@ def screen_game(window):
         if len(hits) > 0:
             lives_boss -= 1
             if lives_boss == 0:
+                assets[SOUND_GOAL].play()
+                time.sleep(7)
                 state = QUIT
                 pygame.quit()
 

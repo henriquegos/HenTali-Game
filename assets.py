@@ -11,6 +11,7 @@ BOSS_IMG = 'boss_img'
 PODER_IMG = 'poder_img'
 FONTE_LIVES = "score_font"
 SOUND_GAMING = 'sound_gaming'
+SOUND_GOAL = 'sound_goal'
 
 #assets
 def load_assets():
@@ -33,5 +34,6 @@ def load_assets():
 
     # Carrega os sons do jogo
     assets[SOUND_GAMING] = pygame.mixer.Sound('assets/snd/castle.ogg')
+    assets[SOUND_GOAL] = pygame.mixer.Sound('assets/snd/goal.ogg')
 
     return assets   
