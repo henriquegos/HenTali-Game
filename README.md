@@ -2,7 +2,7 @@
 PyGame referente a disciplina de Design de Software no Insper em 2020
 
 Objetivo e características do jogo: 
-- chegar ao final da tela
+- matar o vilão
 - Cada tiro atingido é -1 vida  
 
 
