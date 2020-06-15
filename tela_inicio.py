@@ -4,7 +4,7 @@ from configuracao import largura_background, altura_background, FPS, BLACK, GAME
 pygame.mixer.init()
     
 som_inicial = pygame.mixer.Sound('assets/snd/maintheme.ogg')
-som_inicial.set_volume(0.02)
+som_inicial.set_volume(0.03)
 som_inicial.play()
 
 

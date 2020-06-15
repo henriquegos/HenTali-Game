@@ -85,8 +85,8 @@ def screen_game(window):
             lives_hero -= 1
         if lives_hero == 0:
             som_game.set_volume(0)
-            som_loses = assets[SOUND_LOSES]
-            som_loses.set_volume(0.4)
+            som_loses = pygame.mixer.Sound('assets/snd/death.ogg')
+            som_loses.set_volume(0.03)
             som_loses.play()
             time.sleep(2.8)
             state = LOSE
