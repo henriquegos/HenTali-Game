@@ -51,3 +51,6 @@ FALLING = 2
 INIT = 0
 GAME = 1
 QUIT = 2
+LOSE = 3
+WON = 4 
+

@@ -1,7 +1,9 @@
 import pygame
 import random 
-from configuracao import largura_janela, altura_janela, GAME, QUIT, INIT, TITULO
+from configuracao import largura_janela, altura_janela, GAME, QUIT, INIT, TITULO, WON, LOSE
 from tela_inicio import init_screen 
+from tela_perdeu import lose_screen
+from tela_ganhou import won_screen
 from jogo import screen_game
 
 #inicia frameworks
@@ -19,6 +21,10 @@ while state != QUIT:
         state = init_screen(window)
     elif state == GAME:
         state = screen_game(window)
+    elif state == LOSE:
+        state = lose_screen(window)
+    elif state == WON:
+        state = won_screen(window)
     else:
         state = QUIT
 

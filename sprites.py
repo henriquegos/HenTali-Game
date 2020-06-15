@@ -15,9 +15,6 @@ class Personagem(pygame.sprite.Sprite):
         self.rect.bottom = altura_chão
         self.groups = groups
         self.assets = assets
-        som_game = self.assets[SOUND_GAMING]
-        som_game.play()
-        som_game.set_volume(0.02)
         self.speedx = 0
         self.speedy = 0
         self.state = STILL

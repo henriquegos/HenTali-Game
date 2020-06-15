@@ -1,8 +1,8 @@
 #importa bibliotecas necessarias
 import pygame
 import random
-from configuracao import largura_background, altura_background, largura_heroi, altura_heroi, largura_tiro, altura_tiro, largura_boss, altura_boss, largura_poderzin, altura_poderzin, FPS, SPEEDX
-from assets import load_assets, SOUND_GOAL, SOUND_LOSES, SOUND_JUMP, SOUND_HIT_HERO, SOUND_HIT_BOSS
+from configuracao import largura_background, altura_background, largura_heroi, altura_heroi, largura_tiro, altura_tiro, largura_boss, altura_boss, largura_poderzin, altura_poderzin, FPS, SPEEDX, QUIT, LOSE, WON
+from assets import load_assets, SOUND_GOAL, SOUND_LOSES, SOUND_JUMP, SOUND_HIT_HERO, SOUND_HIT_BOSS, SOUND_GAMING
 from sprites import Personagem, Boss, Poderzin, Bullet
 import time
 
@@ -17,6 +17,10 @@ def screen_game(window):
     groups['all_sprites'] = all_sprites
     groups['all_poderzin'] = all_poderzin
     groups['all_bullets'] = all_bullets
+
+    som_game = assets[SOUND_GAMING]
+    som_game.play()
+    som_game.set_volume(0.02)
 
     #Criando o Chefão
     chefão = Boss(groups, assets)
@@ -35,17 +39,14 @@ def screen_game(window):
     JUMPING = 1
     FALLING = 2
 
-    PLAYING = 0
-    QUIT = 1
-    state = PLAYING
 
     keys_down = {}
     lives_hero = 3
-    lives_boss = 12
+    lives_boss = 5
 
     # ======== Loop principal =========
-
-    while state != QUIT:
+    running = True
+    while running:
         clock.tick(FPS) 
 
         for event in pygame.event.get():
@@ -82,27 +83,29 @@ def screen_game(window):
             som_hit_hero.set_volume(0.05)
             som_hit_hero.play()
             lives_hero -= 1
-            if lives_hero == 0:
-                som_loses = assets[SOUND_LOSES]
-                som_loses.set_volume(0.4)
-                som_loses.play()
-                time.sleep(2.8)
-                state = QUIT
-                pygame.quit() 
+        if lives_hero == 0:
+            som_game.set_volume(0)
+            som_loses = assets[SOUND_LOSES]
+            som_loses.set_volume(0.4)
+            som_loses.play()
+            time.sleep(2.8)
+            state = LOSE
+            running = False 
 
-        hits = pygame.sprite.spritecollide(chefão, all_bullets, True, pygame.sprite.collide_mask)
-        if len(hits) > 0:
+        hits_2 = pygame.sprite.spritecollide(chefão, all_bullets, True, pygame.sprite.collide_mask)
+        if len(hits_2) > 0:
             som_hit_boss = assets[SOUND_HIT_BOSS]
             som_hit_boss.set_volume(0.05)
             som_hit_boss.play()
             lives_boss -= 1
-            if lives_boss == 0:
-                som_goal = assets[SOUND_GOAL]
-                som_goal.set_volume(0.6)
-                som_goal.play()
-                time.sleep(7.8)
-                state = QUIT
-                pygame.quit()
+        if lives_boss == 0:
+            som_game.set_volume(0)
+            som_goal = assets[SOUND_GOAL]
+            som_goal.set_volume(0.6)
+            som_goal.play()
+            time.sleep(7.8)
+            state = WON
+            running = False
 
         #atualiza estado do jogo
         all_sprites.update()
