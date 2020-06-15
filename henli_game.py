@@ -18,13 +18,13 @@ pygame.display.set_caption(TITULO)
 state = INIT 
 while state != QUIT:
     if state == INIT:
-        state = init_screen(window)
+        state = init_screen(window) #Tela de início
     elif state == GAME:
-        state = screen_game(window)
+        state = screen_game(window) #Tela do jogo
     elif state == LOSE:
-        state = lose_screen(window)
+        state = lose_screen(window) #Tela "perdeu"
     elif state == WON:
-        state = won_screen(window)
+        state = won_screen(window) #Tela "ganhou"
     else:
         state = QUIT
 
