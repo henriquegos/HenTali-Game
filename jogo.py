@@ -76,7 +76,7 @@ def screen_game(window):
                     player.speedx += SPEEDX
                 if event.key == pygame.K_RIGHT:
                     player.speedx -= SPEEDX
-
+        #Colisões entre poder do boss e personagem
         hits = pygame.sprite.spritecollide(player, all_poderzin, True, pygame.sprite.collide_mask)
         if len(hits) > 0:
             som_hit_hero = assets[SOUND_HIT_HERO]
@@ -91,7 +91,7 @@ def screen_game(window):
             time.sleep(2.8)
             state = LOSE
             running = False 
-
+        #Colisões entre poder do personagem e boss
         hits_2 = pygame.sprite.spritecollide(chefão, all_bullets, True, pygame.sprite.collide_mask)
         if len(hits_2) > 0:
             som_hit_boss = assets[SOUND_HIT_BOSS]
